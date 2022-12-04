@@ -9,6 +9,7 @@ public class AddressBookAppApplication {
     public static void main(String[] args) {
         SpringApplication.run(AddressBookAppApplication.class, args);
         System.out.println("Welcome to the Address Book Application");
+        System.out.println("UC1: Create a AddressBook Project and add Dependency");
     }
 
 }
