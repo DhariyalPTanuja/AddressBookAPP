@@ -1,6 +1,7 @@
 package com.bridgelabz.addressbookapp.service;
 
 import com.bridgelabz.addressbookapp.dto.AddressBookDto;
+import com.bridgelabz.addressbookapp.exception.AddressBookException;
 import com.bridgelabz.addressbookapp.model.AddressBookModel;
 import com.bridgelabz.addressbookapp.repository.AddressBookRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +30,7 @@ public class AddressBookService implements IAddressBookService{
     }
 
     @Override
-    public AddressBookModel getAddressBookData(int id) {
+    public AddressBookModel getAddressBookData(int id) throws AddressBookException {
         AddressBookModel addressBookModel = addressBookRepo.findById(id).get();
         return addressBookModel;
     }
@@ -62,7 +63,7 @@ public class AddressBookService implements IAddressBookService{
 //    }
 
     @Override
-    public void deleteData(int id) {
+    public void deleteData(int id) throws AddressBookException{
         Optional<AddressBookModel> checkId = addressBookRepo.findById(id);
         if(checkId.isPresent())
             addressBookRepo.deleteById(id);

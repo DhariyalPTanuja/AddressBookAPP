@@ -20,7 +20,8 @@ public class AddressBookAppApplication {
         System.out.println("also add Lombok library to auto generate getter setter ,toString for DTO ");
         log.info("AddressBook App started in {} Environment",
                 context.getEnvironment().getProperty("environment"));
-
+        log.info("AddressBook App Database user is {} ",
+                context.getEnvironment().getProperty("spring.datasource.username"));
         System.out.println("Apply validation in  DTO");
 
     }

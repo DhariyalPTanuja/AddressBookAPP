@@ -23,8 +23,8 @@ public class AddressBookController {
     List<AddressBookModel> addressBookList = new ArrayList<>();
 
     @GetMapping("/welcome")
-    public void aboutAddressBook(){
-        serviceAddressBook.welcomeMsg();
+    public String aboutAddressBook(){
+        return serviceAddressBook.welcomeMsg();
     }
     @GetMapping("/get")
     public ResponseEntity<ResponseDto> fetchData(){

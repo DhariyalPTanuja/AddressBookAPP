@@ -2,6 +2,7 @@ package com.bridgelabz.addressbookapp.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.ToString;
 
@@ -16,8 +17,6 @@ public @ToString class AddressBookDto {
 
     public String address;
     public String city;
-    @NotBlank(message = "zip code is not Blank")
-    @Pattern(regexp = "^[0-9]{6}", message = "only 6 digit allow in Zip code ")
     public int zipCode;
     public String state;
 
