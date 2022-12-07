@@ -43,7 +43,7 @@ public class AddressBookController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ResponseDto> insertAddressBookData(@RequestBody AddressBookDto addressBookDto){
+    public ResponseEntity<ResponseDto> insertAddressBookData(@Valid @RequestBody AddressBookDto addressBookDto){
         AddressBookModel addressBookModel = serviceAddressBook.addData(addressBookDto);
         ResponseDto responseDTO = new ResponseDto("New data record in addressbook",addressBookModel);
         ResponseEntity<ResponseDto> response = new ResponseEntity<>(responseDTO, HttpStatus.OK);
@@ -52,7 +52,7 @@ public class AddressBookController {
 
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<ResponseDto> updateData(@RequestBody AddressBookDto addressBookDto,@PathVariable int id){
+    public ResponseEntity<ResponseDto> updateData(@Valid @RequestBody AddressBookDto addressBookDto,@PathVariable int id){
         AddressBookModel addressBookModel = serviceAddressBook.updateAddressBookData(addressBookDto,id);
         ResponseDto responseDTO = new ResponseDto("existing  data updated successfully",addressBookModel);
         ResponseEntity<ResponseDto> response = new ResponseEntity<>(responseDTO, HttpStatus.OK);
