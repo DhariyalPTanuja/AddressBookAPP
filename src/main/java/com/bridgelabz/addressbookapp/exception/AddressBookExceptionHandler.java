@@ -11,7 +11,7 @@ public class AddressBookExceptionHandler {
     private static final String message= "Exception while processing RESt Request";
     @ExceptionHandler(AddressBookException.class)
     public ResponseEntity<ResponseDto> handleAddressBookException(AddressBookException exception){
-        ResponseDto responseDTO = new ResponseDto(message,exception.getMessage());
+        ResponseDto responseDTO = new ResponseDto(message,exception.getMessage(),null);
         return new ResponseEntity<ResponseDto>(responseDTO, HttpStatus.BAD_REQUEST);
     }
 }

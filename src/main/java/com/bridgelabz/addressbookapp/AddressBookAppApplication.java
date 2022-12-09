@@ -23,6 +23,9 @@ public class AddressBookAppApplication {
         log.info("AddressBook App Database user is {} ",
                 context.getEnvironment().getProperty("spring.datasource.username"));
         System.out.println("Apply validation in  DTO");
+        log.info("handling exception ");
+        log.info("using custom query ");
+        log.info("introducing JWT JSON WEB TOKEN : to secure the data we are using token ");
 
     }
 

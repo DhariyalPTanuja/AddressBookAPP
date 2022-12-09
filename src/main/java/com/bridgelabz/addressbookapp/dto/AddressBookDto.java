@@ -14,19 +14,24 @@ public @ToString class AddressBookDto {
     public String lastName;
 
     public long phoneNumber;
+   // @NotEmpty(message = "Phonenumber is not empty")
+    public String email;
 
     public String address;
     public String city;
+    public String district;
+   // @Pattern(regexp = "^[0-9]{6}$" , message = "only 6 digit allow in zipCode")
     public int zipCode;
     public String state;
 
     public AddressBookDto() {
     }
 
- public AddressBookDto(String firstName, String lastName, long phoneNumber, String address, String city, int zipCode, String state) {
+ public AddressBookDto(String firstName, String lastName, long phoneNumber,String email, String address, String city, String district, int zipCode, String state) {
   this.firstName = firstName;
   this.lastName = lastName;
   this.phoneNumber = phoneNumber;
+  this.email = email;
   this.address = address;
   this.city = city;
   this.zipCode = zipCode;
