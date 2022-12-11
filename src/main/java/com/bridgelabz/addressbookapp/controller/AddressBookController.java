@@ -4,18 +4,19 @@ import com.bridgelabz.addressbookapp.dto.AddressBookDto;
 import com.bridgelabz.addressbookapp.dto.ResponseDto;
 import com.bridgelabz.addressbookapp.exception.AddressBookException;
 import com.bridgelabz.addressbookapp.model.AddressBookModel;
+import com.bridgelabz.addressbookapp.model.Email;
 import com.bridgelabz.addressbookapp.service.IAddressBookService;
+import com.bridgelabz.addressbookapp.service.IEmailService;
 import com.bridgelabz.addressbookapp.util.TokenUtil;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
+@Slf4j
 //mark class as controller
 @RestController
 @RequestMapping("/addressbookapp")
@@ -26,6 +27,8 @@ public class AddressBookController {
 //autowire the TokenUtil class
     @Autowired
     TokenUtil tokenUtil;
+    @Autowired
+    IEmailService emailService;
     List<AddressBookModel> addressBookList = new ArrayList<>();
 
     @GetMapping("/welcome")
@@ -109,5 +112,22 @@ public class AddressBookController {
         ResponseDto responseDTO = new ResponseDto("existing  data updated successfully",addressBookModel,token);
         ResponseEntity<ResponseDto> response = new ResponseEntity<>(responseDTO, HttpStatus.OK);
         return response;
+    }
+
+    //Creating  account to send token in mail
+    @PostMapping("/addPerson")
+    public ResponseEntity<ResponseDto> addPerson(@Valid @RequestBody AddressBookDto addressBookDto){
+        AddressBookModel addressBookModel = serviceAddressBook.addData(addressBookDto);
+        String idToken = tokenUtil.createToken(addressBookModel.getId());
+        Email emailModel = new Email(addressBookModel.getEmail(),
+                "New Person data added..","Name: "+addressBookModel.getFirstName()+
+                "  ->token  ->"+idToken);
+        emailService.sendEmail(emailModel);
+        ResponseDto responseDto = new ResponseDto("New Contact Added: ",addressBookModel,idToken);
+        ResponseEntity<ResponseDto> response = new ResponseEntity<>(responseDto, HttpStatus.OK);
+        log.info(String.valueOf(idToken));
+        return response;
+        //list.add(addressBookService.addPerson(addressBookDto));
+        //return addressBookService.addPerson(addressBookDto);
     }
 }
